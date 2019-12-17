@@ -38,6 +38,20 @@ export default class DetailScreen extends Component {
             </View>
         )
     }
+
+    componentDidMount() {
+        this.getDetail();
+    }
+
+    getDetail = async () => {
+        try {
+            let response = await fetch('http://localhost:3000/api/item/:itemCode', {
+                
+            })
+        } catch (err) {
+
+        }
+    }
 }
 
 const styles = StyleSheet.create({
