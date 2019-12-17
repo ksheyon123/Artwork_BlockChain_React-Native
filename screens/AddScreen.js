@@ -70,6 +70,12 @@ export default class AddScreen extends Component {
         console.log(this.state.certification)
     };
     
+    _onTextContentSizeChange = (event) => {
+        this.setState({
+        inputHeight: Math.min(event.nativeEvent.contentSize.height, 100)
+         });
+    }
+    
     render() {
         return (
             <ScrollView style = {styles.container}>
@@ -100,15 +106,15 @@ export default class AddScreen extends Component {
                         <View style = {{marginTop : 24}}>
                             <Text style = {styles.inputTitle}>작품설명</Text>
                             <TextInput
-                                style = {styles.inputDescription} placeholder = "작품에대한 설명을 입력하세요" autoCapitalize = "none" onChangeText={ArtDescription => this.setState({ArtDescription})} value={this.state.ArtDescription}
+                                style = {styles.inputDescription} multiline={true} numberOfLines = {4} placeholder = "작품에대한 설명을 입력하세요" autoCapitalize = "none" onChangeText={ArtDescription => this.setState({ArtDescription})} value={this.state.ArtDescription}
                             />
                         </View>
                         
                         <View style = {{marginTop : 24}}>
-                            <Text style = {styles.inputTitle}>이미지</Text>
+                            <Text style = {styles.inputTitle}>작품 이미지</Text>
                             <View style= {{ flex:1, alignItems:'center'}}>
                                 <TouchableOpacity onPress={this._pickImage}>
-                                    <View style={{height: 200,  borderWidth: 0.5, width:150, justifyContent: 'center', alignItems: 'center',marginTop:32 }}>
+                                    <View style={{height: 400,  borderWidth: 0.5, width:330, justifyContent: 'center', alignItems: 'center',marginTop:32 }}>
                                     {
                                         this.state.selected
                                             ?(<View style={{alignItems:'center',justifyContent:'center'}}>
@@ -120,21 +126,23 @@ export default class AddScreen extends Component {
                                 </TouchableOpacity>
                             </View>
                         </View>
-                        
-                        <View style= {{ flex:1, alignItems:'center'}}>
-                            <TouchableOpacity onPress={this._pickCertification}>
-                                <View style={{height: 200,  borderWidth: 0.5, width:150, justifyContent: 'center', alignItems: 'center',marginTop:32 }}>
-                                {
-                                    this.state.selected2
-                                        ?(<View style={{alignItems:'center',justifyContent:'center'}}>
-                                            <FontAwesome name="camera" size={80} color="gray"></FontAwesome>
-                                                <Text>인증서 등록</Text></View>)
-                                          :(<View><Image source={{uri:this.state.certification}} style={{height:200,width:150}}/></View>)
-                                }
-                                    </View>
-                              </TouchableOpacity>
-                        </View>
 
+                        <View style = {{marginTop : 24}}>
+                            <Text style = {styles.inputTitle}>인증서 이미지</Text>
+                            <View style= {{ flex:1, alignItems:'center'}}>
+                                <TouchableOpacity onPress={this._pickCertification}>
+                                    <View style={{height: 400,  borderWidth: 0.5, width:330, justifyContent: 'center', alignItems: 'center',marginTop:32 }}>
+                                    {
+                                        this.state.selected2
+                                            ?(<View style={{alignItems:'center',justifyContent:'center'}}>
+                                                <FontAwesome name="camera" size={80} color="gray"></FontAwesome>
+                                                    <Text>인증서 등록</Text></View>)
+                                              :(<View><Image source={{uri:this.state.certification}} style={{height:200,width:150}}/></View>)
+                                    }
+                                        </View>
+                                  </TouchableOpacity>
+                            </View>
+                        </View>              
                     </View>
 
                     <TouchableOpacity style={styles.under_button} onPress={this.handleRegister}>
@@ -177,7 +185,8 @@ const styles = StyleSheet.create({
       borderBottomWidth : StyleSheet.hairlineWidth,
       height : 120,
       fontSize : 15,
-      color : "#161F3D"
+      color : "#161F3D",
+      marginRight : 30
     },
     halfinput: {
         borderBottomColor : "#8A8F9E",
