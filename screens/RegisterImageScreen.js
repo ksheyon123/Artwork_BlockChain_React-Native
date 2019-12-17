@@ -4,11 +4,14 @@ import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 import { Ionicons, FontAwesome } from '@expo/vector-icons'
+import ImgToBase64 from 'react-native-image-base64';
+import * as FileSystem from 'expo-file-system';
 
 export default class RegisterImageScreen extends Component {
     
     state = {
         image: '',
+        data: '',
         selected: true,
     };
 
@@ -33,9 +36,13 @@ export default class RegisterImageScreen extends Component {
         });
 
         if (!result.cancelled) {
-            this.setState({ image: result.uri, selected: false });
-            console.log(result.uri)
+            this.setState({ 
+                image: result.uri,
+                data: result.data,
+                selected: false 
+            });
         }
+
     };
 
     saveImage = () => {
@@ -67,7 +74,7 @@ export default class RegisterImageScreen extends Component {
             
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}  onPress={this.saveImage}>
+                    <TouchableOpacity style={styles.button}  onPress={this._uploadImage}>
                             <Text style = {{color:"#FFF", fontWeight: "500"}}>등록하기</Text>
                     </TouchableOpacity>
                 </View>

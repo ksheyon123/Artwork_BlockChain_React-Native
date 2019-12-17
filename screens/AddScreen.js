@@ -12,7 +12,7 @@ export default class AddScreen extends Component {
 
   state = {
       artName : '',
-      ArtistCode : '',
+      artistName : '',
       imageUri: '',
       certification: '',
       ArtistDescription: '',
@@ -35,7 +35,7 @@ export default class AddScreen extends Component {
                 <View style = {{marginTop : 24}}>
                   <Text style = {styles.inputTitle}>작가명</Text>
                   <TextInput
-                    style = {styles.input} placeholder = "작가명을 입력하세요." autoCapitalize = "none" onChangeText={artistName => this.setState({ArtistCode})} value={this.state.artistName}
+                    style = {styles.input} placeholder = "작가명을 입력하세요." autoCapitalize = "none" onChangeText={artistName => this.setState({artistName})} value={this.state.artistName}
                   />
                 </View>
                 <View style ={styles.image}>
@@ -79,7 +79,7 @@ export default class AddScreen extends Component {
         </View>
       </ScrollView>
     );
-  }a
+  }
 }
 
 const styles = StyleSheet.create({

@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\bch49\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add @react-navigation/native@next @react-navigation/bottom-tabs@next
+  C:\Program Files\nodejs\node.exe C:\Users\bch49\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add react-native-fetch-blon
 
 PATH: 
   C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\bch49\bin;C:\Program Files\Go;C:\ProgramData\Anaconda3\Library\usr\bin;C:\ProgramData\Anaconda3\Library\bin;C:\ProgramData\Anaconda3\Scripts;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files\nodejs;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit;C:\Program Files\Geth;C:\Program Files\PuTTY;C:\Users\bch49\AppData\Roaming\npm;C:\Users\bch49\AppData\Local\Programs\Microsoft VS Code;C:\Program Files\Go\bin;C:\Program Files\Go\doc;C:\Program Files\Git\cmd;C:\Program Files\MySQL\MySQL Shell 8.0\bin;C:\Users\bch49\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\bch49\AppData\Local\atom\bin;C:\Users\bch49\go\bin;C:\Program Files\Go\doc;C:\Program Files\Git\;C:\Program Files\Go\bin
@@ -14,7 +14,17 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: EPERM: operation not permitted, unlink 'C:\TAG&C\project_picasso\node_modules\@babel\plugin-transform-runtime\node_modules\.bin'
+  Error: https://registry.yarnpkg.com/react-native-fetch-blon: Not found
+      at Request.params.callback [as _callback] (C:\Users\bch49\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:66830:18)
+      at Request.self.callback (C:\Users\bch49\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140464:22)
+      at Request.emit (events.js:198:13)
+      at Request.<anonymous> (C:\Users\bch49\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141436:10)
+      at Request.emit (events.js:198:13)
+      at IncomingMessage.<anonymous> (C:\Users\bch49\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141358:12)
+      at Object.onceWrapper (events.js:286:20)
+      at IncomingMessage.emit (events.js:203:15)
+      at endReadableNT (_stream_readable.js:1129:12)
+      at process._tickCallback (internal/process/next_tick.js:63:19)
 
 npm manifest: 
   {
@@ -29,11 +39,17 @@ npm manifest:
     "dependencies": {
       "@expo/vector-icons": "^10.0.6",
       "expo": "~36.0.0",
+      "expo-constants": "^8.0.0",
+      "expo-file-system": "~8.0.0",
+      "expo-image-picker": "~8.0.0",
+      "expo-permissions": "^8.0.0",
       "native-base": "^2.13.8",
       "react": "~16.9.0",
       "react-dom": "~16.9.0",
       "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
       "react-native-gesture-handler": "^1.5.2",
+      "react-native-image-base64": "^0.1.3",
+      "react-native-image-to-base64": "^0.1.0",
       "react-native-reanimated": "^1.4.0",
       "react-native-web": "~0.11.7",
       "react-navigation": "^4.0.10",
@@ -2237,7 +2253,7 @@ Lockfile:
       path-browserify "^1.0.0"
       url-parse "^1.4.4"
   
-  expo-constants@~8.0.0:
+  expo-constants@^8.0.0, expo-constants@~8.0.0:
     version "8.0.0"
     resolved "https://registry.yarnpkg.com/expo-constants/-/expo-constants-8.0.0.tgz#e2c5a072dacb4263ccfc57dcb4835ca791960d48"
     integrity sha512-NGRwSWfhwNFA9WVLXwqnSDPJJ4DdXTqEkl9Fr9PcyW5VCoFgz7uke256E1YZsYhOE0Ph365lu/5jjZs+MRmRog==
@@ -2263,6 +2279,11 @@ Lockfile:
     dependencies:
       fontfaceobserver "^2.1.0"
   
+  expo-image-picker@~8.0.0:
+    version "8.0.1"
+    resolved "https://registry.yarnpkg.com/expo-image-picker/-/expo-image-picker-8.0.1.tgz#bae9e0d89722de9a6e60e55f0e4291fc099abb14"
+    integrity sha512-f4KVQFZSgNiYlt8smZ9kc/gaHkJeFLhRYiSgQdOlmLOkCuX4jxtg++PjCZLSSVwMVv/DUHT0EvUzOZqJokZfdg==
+  
   expo-keep-awake@~8.0.0:
     version "8.0.0"
     resolved "https://registry.yarnpkg.com/expo-keep-awake/-/expo-keep-awake-8.0.0.tgz#f9200a876a5db86e3f0aec8843428a918cdc08d6"
@@ -2280,7 +2301,7 @@ Lockfile:
     dependencies:
       invariant "^2.2.4"
   
-  expo-permissions@~8.0.0:
+  expo-permissions@^8.0.0, expo-permissions@~8.0.0:
     version "8.0.0"
     resolved "https://registry.yarnpkg.com/expo-permissions/-/expo-permissions-8.0.0.tgz#5a45e8451dd7ff37c9e6ce5e2447818372547813"
     integrity sha512-GHTRmwh1rd1b0FcibluPFu93NNQyl9b1anBBDVPmomoo9Prz7kDcO5p2hFqM99r896yvAUSe0fPloPKUq4g/1A==
@@ -4360,6 +4381,16 @@ Lockfile:
       invariant "^2.2.4"
       prop-types "^15.7.2"
   
+  react-native-image-base64@^0.1.3:
+    version "0.1.3"
+    resolved "https://registry.yarnpkg.com/react-native-image-base64/-/react-native-image-base64-0.1.3.tgz#bfc9eaf7cd3ec705aa25f00f6a11d0c379217fe8"
+    integrity sha512-0n1gLLvA9VJZ1w0zyaDYZQH/Re2VOQFW5kt0P/qYhqs4f1MvWsaTs+7CxXIQR3L2wgEsfDJ1sIKyrAZ0RoR2Hg==
+  
+  react-native-image-to-base64@^0.1.0:
+    version "0.1.0"
+    resolved "https://registry.yarnpkg.com/react-native-image-to-base64/-/react-native-image-to-base64-0.1.0.tgz#195fd8ab0348dd72d1fa8a45778ef0cac835ba5b"
+    integrity sha1-GV/YqwNI3XLR+opFd47wysg1uls=
+  
   react-native-iphone-x-helper@^1.0.3:
     version "1.2.1"
     resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.2.1.tgz#645e2ffbbb49e80844bb4cbbe34a126fda1e6772"
@@ -4372,6 +4403,11 @@ Lockfile:
     dependencies:
       prop-types "^15.6.2"
       react-native-iphone-x-helper "^1.0.3"
+  
+  react-native-reanimated@^1.4.0:
+    version "1.4.0"
+    resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-1.4.0.tgz#7f1acbf9be08492d834f512700570978052be2f9"
+    integrity sha512-tO7nSNNP+iRLVbkcSS5GXyDBb7tSI02+XuRL3/S39EAr35rnvUy2JfeLUQG+fWSObJjnMVhasUDEUwlENk8IXw==
   
   react-native-safe-area-view@^0.14.1, react-native-safe-area-view@^0.14.6:
     version "0.14.8"
