@@ -4,6 +4,7 @@ import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 import {FontAwesome } from '@expo/vector-icons'
+import * as FileSystem from 'expo-file-system';
 
 export default class AddScreen extends Component {
 
@@ -23,6 +24,8 @@ export default class AddScreen extends Component {
         certification: '',
         ArtistDescription: '',
         ArtDescription : '',
+        img_base64 : '',
+        cer_base64 : ''
     }
 
     componentDidMount() {
@@ -52,6 +55,9 @@ export default class AddScreen extends Component {
             });
         }
         console.log(this.state.imageUri)
+        const base64 = await FileSystem.readAsStringAsync(this.state.imageUri, { encoding: 'base64' });
+        this.setState({img_base64 : base64})
+        console.log(this.state.img_base64)
     };
 
     _pickCertification = async () => {
@@ -68,6 +74,9 @@ export default class AddScreen extends Component {
             });
         }
         console.log(this.state.certification)
+        const base64 = await FileSystem.readAsStringAsync(this.state.certification, { encoding: 'base64' });
+        this.setState({cer_base64 : base64})
+        console.log(this.state.cer_base64)
     };
     
     _onTextContentSizeChange = (event) => {
