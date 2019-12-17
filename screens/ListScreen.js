@@ -26,21 +26,21 @@ export default class ListScreen extends Component {
     }
 
     renderItem = ({item}) => {
-      return <TouchableOpacity
-              onPress = {() => this.props.navigation.navigate("Detail", {itemcode : item.itemcode})}
-              >
-                  <View style = {{flexDirection : 'row', marginVertical : 32}}>
-                      <Image
-                      style = {{width : 128, height : 128}}
-                      source = {{uri : item.item_infor.image}}
-                      />
-                      <View style = {{marginLeft : 16}}>
-                          <Text>작품명 : {item.item_infor.pic_name}</Text>
-                          <Text>작가명 : {item.item_infor.artist_name}</Text>
-                          
-                      </View>
-                  </View>
-            </TouchableOpacity>
+        return <TouchableOpacity
+                onPress = {() => this.props.navigation.navigate("Detail", {itemcode : item.itemcode})}
+                >
+                    <View style = {{flexDirection : 'row', marginVertical : 32}}>
+                        <Image
+                            style = {{width : 128, height : 128}}
+                            source = {{uri : item.item_infor.image}}
+                        />
+                        <View style = {{marginLeft : 16}}>
+                            <Text>작품명 : {item.item_infor.pic_name}</Text>
+                            <Text>작가명 : {item.item_infor.artist_name}</Text>
+                            
+                        </View>
+                    </View>
+                </TouchableOpacity>
     }
 
     render() {
@@ -58,11 +58,11 @@ export default class ListScreen extends Component {
     }
 
 const styles = StyleSheet.create({
-  container: {
-      flex:1
-  },
-  form : {
-    marginBottom : 48,
-    marginHorizontal: 30
-  }
+    container: {
+        flex:1
+    },
+    form : {
+        marginBottom : 48,
+        marginHorizontal: 30
+    }
 });
