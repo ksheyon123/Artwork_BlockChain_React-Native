@@ -21,7 +21,9 @@ export default class DetailScreen extends Component {
     componentDidMount() {
         const {navigation} = this.props
         itemcode = navigation.getParam('itemcode')
+        console.log(itemcode)
         this.setState({receivecode : itemcode})
+        this.getDetail();
     }
 
     render() {
@@ -39,17 +41,21 @@ export default class DetailScreen extends Component {
         )
     }
 
-    componentDidMount() {
-        this.getDetail();
-    }
-
     getDetail = async () => {
         try {
             let response = await fetch('http://localhost:3000/api/item/:itemCode', {
-                
+                method: 'POST',
+                headers: {
+                    'Content-Type' : 'application/json',
+                },
+                body: JSON.stringify({itemCode: this.state.receivecode}),
             })
+            let json = await response.json();
+            if (response.ok) {
+                console.log(json);
+            }
         } catch (err) {
-
+            console.log(err);
         }
     }
 }

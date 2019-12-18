@@ -55,7 +55,6 @@ export default class AddScreen extends Component {
             });
         }
         const base64 = await FileSystem.readAsStringAsync(this.state.imageUri, { encoding: 'base64' });
-        splitBase64(this.state.img_base64);
         this.setState({img_base64 : base64})
     };
 
@@ -159,10 +158,6 @@ export default class AddScreen extends Component {
         );
     }
 
-    splitBase64 = async (data) => {
-        console.log(data.length);
-    }
-
     handleRegister = async () => {
         try {
           let response = await fetch('http://localhost:3000/api/setitem', {
@@ -170,7 +165,7 @@ export default class AddScreen extends Component {
             headers : {
               'Content-Type' : 'application/json',
             },
-            body : JSON.stringify({artistName: this.state.artistName, ItemImage: this.state.img_base64, ItemCertificate: this.state.cer_base64, ItemName: this.state.artName, ItemDetails: this.state.ArtDescription, ArtistIntro: this.state.ArtistDescription}),
+            body : JSON.stringify({ArtistName: this.state.artistName, ItemImage: this.state.img_base64, ItemCertificate: this.state.cer_base64, ItemName: this.state.artName, ItemDetails: this.state.ArtDescription, ArtistIntro: this.state.ArtistDescription}),
           });
           if (response.ok) { 
             alert('등록 완료');
