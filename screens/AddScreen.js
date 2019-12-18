@@ -54,6 +54,7 @@ export default class AddScreen extends Component {
                 selected: false 
             });
         }
+
         const base64 = await FileSystem.readAsStringAsync(this.state.imageUri, { encoding: 'base64' });
         this.setState({img_base64 : base64})
     };
