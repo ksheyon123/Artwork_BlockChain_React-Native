@@ -161,7 +161,6 @@ export default class AddScreen extends Component {
             </ScrollView>
         );
     }
-<<<<<<< HEAD
 
     handleRegister = async () => {
         try {
@@ -180,8 +179,6 @@ export default class AddScreen extends Component {
         }
         
       }
-=======
->>>>>>> 0fc54bdab589ece9459206f2584aba70daae4ba1
 }
 
 const styles = StyleSheet.create({
