@@ -122,13 +122,13 @@ export default class AddScreen extends Component {
                             <Text style = {styles.inputTitle}>작품 이미지</Text>
                             <View style= {{ flex:1, alignItems:'center'}}>
                                 <TouchableOpacity onPress={this._pickImage}>
-                                    <View style={{height: 500,  borderWidth: 0.5, width: 500, justifyContent: 'center', alignItems: 'center',marginTop:32 }}>
+                                    <View style={{height: Dimensions.get("window").width,  borderWidth: 0.5, width: Math.round(Dimensions.get('window').width * 15 / 16), justifyContent: 'center', alignItems: 'center',marginTop:32 }}>
                                     {
                                         this.state.selected
                                             ?(<View style={{alignItems:'center',justifyContent:'center'}}>
                                               <FontAwesome name="camera" size={80} color="gray"></FontAwesome>
                                                 <Text>사진등록</Text></View>)
-                                            :(<View><Image source={{uri:this.state.imageUri}} style={{height: 400 ,width:400, resizeMode : 'stretch'}}/></View>)
+                                            :(<View><Image source={{uri:this.state.imageUri}} style={{height: Math.round(Dimensions.get('window').width * 12 / 16) ,width:Math.round(Dimensions.get('window').width * 12 / 16), resizeMode : 'stretch'}}/></View>)
                                     }
                                     </View>
                                 </TouchableOpacity>
@@ -139,13 +139,13 @@ export default class AddScreen extends Component {
                             <Text style = {styles.inputTitle}>인증서 이미지</Text>
                             <View style= {{ flex:1, alignItems:'center'}}>
                                 <TouchableOpacity onPress={this._pickCertification}>
-                                    <View style={{height: 500,  borderWidth: 0.5, width:500, justifyContent: 'center', alignItems: 'center',marginTop:32 }}>
+                                    <View style={{height: Dimensions.get("window").width,  borderWidth: 0.5, width: Math.round(Dimensions.get('window').width * 15 / 16), justifyContent: 'center', alignItems: 'center',marginTop:32 }}>
                                     {
                                         this.state.selected2
                                             ?(<View style={{alignItems:'center',justifyContent:'center'}}>
                                                 <FontAwesome name="camera" size={80} color="gray"></FontAwesome>
                                                     <Text>인증서 등록</Text></View>)
-                                              :(<View><Image source={{uri:this.state.certification}} style={{height:400,width:400,resizeMode : 'stretch'}}/></View>)
+                                              :(<View><Image source={{uri:this.state.certification}} style={{height:Math.round(Dimensions.get('window').width * 12 / 16),width:Math.round(Dimensions.get('window').width * 12 / 16),resizeMode : 'stretch'}}/></View>)
                                     }
                                         </View>
                                   </TouchableOpacity>
