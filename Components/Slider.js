@@ -57,7 +57,7 @@ class Slider extends React.Component {
     const { images } = this.props;
     const { selectedIndex } = this.state;
     return (
-      <View style={{ height: 350, width: '100%' }}>
+      <View style={{ height: Math.round(Dimensions.get('window').width * 9 / 16) , width: Dimensions.get("window").width }}>
         <ScrollView
           horizontal
           pagingEnabled
@@ -93,8 +93,12 @@ class Slider extends React.Component {
 
 const styles = StyleSheet.create({
   backgroundImage: {
-    height: 350,
-    width: Dimensions.get("window").width
+    height : Math.round(Dimensions.get('window').width * 9 / 16),
+    width : Dimensions.get("window").width,
+    // height : Dimensions.get("window").width,
+    // width : 250,
+    // height: 350,
+    resizeMode : 'stretch',
   },
   circleDiv: {
     position: "absolute",

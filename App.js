@@ -16,14 +16,14 @@ const ListStack = createStackNavigator({
         screen : ListScreen,
         navigationOptions : {
             headerLeft : <Text style = {{marginLeft : 20}}></Text>,
-            headerTitle : <View style={{alignItems: "center", flex : 1}}><Text style = {{fontSize : 24}}>Art List</Text></View>,
+            headerTitle : <View style={{alignItems: "center", flex : 1}}><Text style = {{fontSize : 24}}>Gallery</Text></View>,
             headerRight :  <Text style = {{marginLeft : 20}}></Text>,
         }
     },
     Detail : {
         screen : DetailScreen,
         navigationOptions : {
-            headerTitle : <View style={{alignItems: "center", flex : 1}}><Text style = {{fontSize : 24}}>신청하기</Text></View>,
+            headerTitle : <View style={{alignItems: "center", flex : 1}}><Text style = {{fontSize : 24}}>작품 상세보기</Text></View>,
             headerRight : <Text style = {{marginRight : 20}}></Text>
         }
     }
@@ -55,8 +55,8 @@ const AppTabNavigator = createBottomTabNavigator(
     },
     {
         tabBarOptions : {
-            activeTintColor : "#0C00AF",
-            inactiveTintColor : "#8888C4",
+            activeTintColor : "#7d00af",
+            inactiveTintColor : "#c8a3d4",
             showLabel : false
         }
     }
