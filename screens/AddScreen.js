@@ -54,10 +54,9 @@ export default class AddScreen extends Component {
                 selected: false 
             });
         }
-        console.log(this.state.imageUri)
+
         const base64 = await FileSystem.readAsStringAsync(this.state.imageUri, { encoding: 'base64' });
         this.setState({img_base64 : base64})
-        console.log(this.state.img_base64)
     };
 
     _pickCertification = async () => {
@@ -73,10 +72,8 @@ export default class AddScreen extends Component {
                 selected2: false 
             });
         }
-        console.log(this.state.certification)
         const base64 = await FileSystem.readAsStringAsync(this.state.certification, { encoding: 'base64' });
         this.setState({cer_base64 : base64})
-        console.log(this.state.cer_base64)
     };
     
     _onTextContentSizeChange = (event) => {
@@ -161,6 +158,28 @@ export default class AddScreen extends Component {
             </ScrollView>
         );
     }
+
+    splitBase64 = async (data) => {
+        console.log(data.length);
+    }
+
+    handleRegister = async () => {
+        try {
+          let response = await fetch('http://localhost:3000/api/setitem', {
+            method: 'POST',
+            headers : {
+              'Content-Type' : 'application/json',
+            },
+            body : JSON.stringify({artistName: this.state.artistName, ItemImage: this.state.img_base64, ItemCertificate: this.state.cer_base64, ItemName: this.state.artName, ItemDetails: this.state.ArtDescription, ArtistIntro: this.state.ArtistDescription}),
+          });
+          if (response.ok) { 
+            alert('등록 완료');
+          } 
+        } catch (err) {
+          console.log(err);
+        }
+        
+      }
 }
 
 const styles = StyleSheet.create({
@@ -252,4 +271,4 @@ const styles = StyleSheet.create({
         justifyContent : "center",
         marginBottom : 32
     }
-})
+});
