@@ -25,9 +25,9 @@ export default class DetailScreen extends Component {
         return (
             <ScrollView style={styles.container}>
                 <View style={styles.image_image}>
-                  <Slider
-                  images = {images}
-                  />
+                    <Slider
+                    images = {images}
+                    />
                 </View>
                 <View style={styles.image_text}>
                     <Text>{this.state.receivecode}</Text>

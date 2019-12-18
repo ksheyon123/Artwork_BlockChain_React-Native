@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import {View, Text, StyleSheet, Alert, ScrollView, TextInput, TouchableOpacity, Image} from 'react-native';
+import {View, Text, StyleSheet, Alert, ScrollView, TextInput, TouchableOpacity, Image, Dimensions} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 import {FontAwesome } from '@expo/vector-icons'
 import * as FileSystem from 'expo-file-system';
+import base64 from 'react-native-base64'
+
 
 export default class AddScreen extends Component {
 
@@ -25,7 +27,8 @@ export default class AddScreen extends Component {
         ArtistDescription: '',
         ArtDescription : '',
         img_base64 : '',
-        cer_base64 : ''
+        cer_base64 : '',
+        img : ''
     }
 
     componentDidMount() {
@@ -44,8 +47,6 @@ export default class AddScreen extends Component {
     _pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [70,102],
         });
 
         if (!result.cancelled) {
@@ -54,16 +55,15 @@ export default class AddScreen extends Component {
                 selected: false 
             });
         }
-
+        console.log(this.state.imageUri)
         const base64 = await FileSystem.readAsStringAsync(this.state.imageUri, { encoding: 'base64' });
         this.setState({img_base64 : base64})
+        // console.log(this.state.img_base64)
     };
 
     _pickCertification = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [70,102],
+            mediaTypes: ImagePicker.MediaTypeOptions.All
         });
 
         if (!result.cancelled) {
@@ -72,8 +72,10 @@ export default class AddScreen extends Component {
                 selected2: false 
             });
         }
+        console.log(this.state.certification)
         const base64 = await FileSystem.readAsStringAsync(this.state.certification, { encoding: 'base64' });
         this.setState({cer_base64 : base64})
+        console.log(this.state.cer_base64)
     };
     
     _onTextContentSizeChange = (event) => {
@@ -105,7 +107,7 @@ export default class AddScreen extends Component {
                         <View style = {{marginTop : 24}}>
                             <Text style = {styles.inputTitle}>작가설명</Text>
                             <TextInput
-                                style = {styles.inputDescription} placeholder = "작가에대한 설명을 입력하세요" autoCapitalize = "none" onChangeText={ArtistDescription => this.setState({ArtistDescription})} value={this.state.ArtistDescription}
+                                style = {styles.inputDescription} multiline={true} numberOfLines = {4} placeholder = "작가에대한 설명을 입력하세요" autoCapitalize = "none" onChangeText={ArtistDescription => this.setState({ArtistDescription})} value={this.state.ArtistDescription}
                             />
                         </View>
                         
@@ -120,13 +122,13 @@ export default class AddScreen extends Component {
                             <Text style = {styles.inputTitle}>작품 이미지</Text>
                             <View style= {{ flex:1, alignItems:'center'}}>
                                 <TouchableOpacity onPress={this._pickImage}>
-                                    <View style={{height: 400,  borderWidth: 0.5, width:330, justifyContent: 'center', alignItems: 'center',marginTop:32 }}>
+                                    <View style={{height: 500,  borderWidth: 0.5, width: 500, justifyContent: 'center', alignItems: 'center',marginTop:32 }}>
                                     {
                                         this.state.selected
                                             ?(<View style={{alignItems:'center',justifyContent:'center'}}>
                                               <FontAwesome name="camera" size={80} color="gray"></FontAwesome>
                                                 <Text>사진등록</Text></View>)
-                                            :(<View><Image source={{uri:this.state.imageUri}} style={{height:200,width:150}}/></View>)
+                                            :(<View><Image source={{uri:this.state.imageUri}} style={{height: 400 ,width:400, resizeMode : 'stretch'}}/></View>)
                                     }
                                     </View>
                                 </TouchableOpacity>
@@ -137,13 +139,13 @@ export default class AddScreen extends Component {
                             <Text style = {styles.inputTitle}>인증서 이미지</Text>
                             <View style= {{ flex:1, alignItems:'center'}}>
                                 <TouchableOpacity onPress={this._pickCertification}>
-                                    <View style={{height: 400,  borderWidth: 0.5, width:330, justifyContent: 'center', alignItems: 'center',marginTop:32 }}>
+                                    <View style={{height: 500,  borderWidth: 0.5, width:500, justifyContent: 'center', alignItems: 'center',marginTop:32 }}>
                                     {
                                         this.state.selected2
                                             ?(<View style={{alignItems:'center',justifyContent:'center'}}>
                                                 <FontAwesome name="camera" size={80} color="gray"></FontAwesome>
                                                     <Text>인증서 등록</Text></View>)
-                                              :(<View><Image source={{uri:this.state.certification}} style={{height:200,width:150}}/></View>)
+                                              :(<View><Image source={{uri:this.state.certification}} style={{height:400,width:400,resizeMode : 'stretch'}}/></View>)
                                     }
                                         </View>
                                   </TouchableOpacity>
@@ -154,32 +156,11 @@ export default class AddScreen extends Component {
                     <TouchableOpacity style={styles.under_button} onPress={this.handleRegister}>
                         <Text style = {{color:"#FFF", fontWeight: "500"}}>작성 완료</Text>
                     </TouchableOpacity>
+                    <Image style={{width: 50, height: 50}} source={{uri: `data:image/png;base64,`}}/>
                 </View>
             </ScrollView>
         );
     }
-
-    splitBase64 = async (data) => {
-        console.log(data.length);
-    }
-
-    handleRegister = async () => {
-        try {
-          let response = await fetch('http://localhost:3000/api/setitem', {
-            method: 'POST',
-            headers : {
-              'Content-Type' : 'application/json',
-            },
-            body : JSON.stringify({artistName: this.state.artistName, ItemImage: this.state.img_base64, ItemCertificate: this.state.cer_base64, ItemName: this.state.artName, ItemDetails: this.state.ArtDescription, ArtistIntro: this.state.ArtistDescription}),
-          });
-          if (response.ok) { 
-            alert('등록 완료');
-          } 
-        } catch (err) {
-          console.log(err);
-        }
-        
-      }
 }
 
 const styles = StyleSheet.create({
@@ -264,11 +245,11 @@ const styles = StyleSheet.create({
     },
     under_button:{
         marginHorizontal : 30,
-        backgroundColor: "#0C00AF",
+        backgroundColor: "#7d00af",
         borderRadius : 4,
         height : 52,
         alignItems : "center",
         justifyContent : "center",
         marginBottom : 32
     }
-});
+})
