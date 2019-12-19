@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity, ScrollView, FlatList, Image } from 'react-native';
-
+import { StyleSheet, Text, View, Button, TouchableOpacity, ScrollView, FlatList, Image, RefreshControl,SafeAreaView } from 'react-native';
+import Constants from 'expo-constants';
 
 
 // const images = [
@@ -9,7 +9,9 @@ import { StyleSheet, Text, View, Button, TouchableOpacity, ScrollView, FlatList,
 //     "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
 //     "https://images.unsplash.com/photo-1429087969512-1e85aab2683d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
 //     "https://images.unsplash.com/photo-1505678261036-a3fcc5e884ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
-// ];
+// ];123
+
+
 export default class ListScreen extends Component {
 
     constructor(props) {
@@ -19,14 +21,21 @@ export default class ListScreen extends Component {
         // }
         this.state = {
             data: [
-                { itemcode: 1, item_infor: { image: "https://user-images.githubusercontent.com/52039229/71051331-56e15480-218b-11ea-95e6-48c63d29bd9c.jpg", pic_name: "별이 빛나는 밤", artist_name: "Vincent Willem van Gogh" } },
-                { itemcode: 2, item_infor: { image: "https://user-images.githubusercontent.com/52039229/71051446-ae7fc000-218b-11ea-8d9c-34c27df25d4d.jpg", pic_name: "진주귀걸이를 한 소녀", artist_name: "Johannes Jan Vermeer" } },
-                { itemcode: 3, item_infor: { image: "https://user-images.githubusercontent.com/52039229/71053438-bcd0da80-2191-11ea-81c1-a3b880b29253.jpg", pic_name: "키스", artist_name: "Gustav Klimt" } },
-                { itemcode: 4, item_infor: { image: "https://user-images.githubusercontent.com/52039229/71053673-8d6e9d80-2192-11ea-96e8-31d10ad33de3.PNG", pic_name: "게르니카", artist_name: "Pablo Ruiz y Picasso" } },
-                { itemcode: 5, item_infor: { image: "https://user-images.githubusercontent.com/52039229/71053728-bf7fff80-2192-11ea-8255-629477d0fce1.PNG", pic_name: "절규", artist_name: "Edvard Munch" } }
-            ]
+                // { itemcode: 1, item_infor: { image: "https://user-images.githubusercontent.com/52039229/71051331-56e15480-218b-11ea-95e6-48c63d29bd9c.jpg", pic_name: "별이 빛나는 밤", artist_name: "Vincent Willem van Gogh" } },
+                // { itemcode: 2, item_infor: { image: "https://user-images.githubusercontent.com/52039229/71051446-ae7fc000-218b-11ea-8d9c-34c27df25d4d.jpg", pic_name: "진주귀걸이를 한 소녀", artist_name: "Johannes Jan Vermeer" } },
+                // { itemcode: 3, item_infor: { image: "https://user-images.githubusercontent.com/52039229/71053438-bcd0da80-2191-11ea-81c1-a3b880b29253.jpg", pic_name: "키스", artist_name: "Gustav Klimt" } },
+                // { itemcode: 4, item_infor: { image: "https://user-images.githubusercontent.com/52039229/71053673-8d6e9d80-2192-11ea-96e8-31d10ad33de3.PNG", pic_name: "게르니카", artist_name: "Pablo Ruiz y Picasso" } },
+                // { itemcode: 5, item_infor: { image: "https://user-images.githubusercontent.com/52039229/71053728-bf7fff80-2192-11ea-8255-629477d0fce1.PNG", pic_name: "절규", artist_name: "Edvard Munch" } }
+            ],
+            refreshing: false,
         }
     }
+    _onRefresh = () => {
+        this.setState({refreshing: true});
+        this.getListData().then(() => {
+          this.setState({refreshing: false});
+        });
+      }
 
     renderItem = ({ item }) => {
         return <TouchableOpacity
@@ -48,10 +57,17 @@ export default class ListScreen extends Component {
 
     render() {
         return (
-            <ScrollView>
+            <ScrollView 
+                refreshControl={
+                    <RefreshControl
+                    refreshing={this.state.refreshing}
+                    onRefresh={this._onRefresh}
+                    />
+                }
+            >
                 <View style={styles.container}>
                     <View style={styles.topImage}>
-                        <Image  style={{ width: '100%', height: 300}} source={{uri : "https://user-images.githubusercontent.com/52039229/71054338-02db6d80-2195-11ea-832e-f4c48b6f9b08.PNG"}}/>
+                        <Image  style={{ width: '100%', height: 300}} source={{uri : "https://user-images.githubusercontent.com/52062612/71164415-57184780-2292-11ea-801c-73685c7ff024.png"}}/>
                     </View>
                     <View style={styles.form}>
                         <FlatList
@@ -66,6 +82,7 @@ export default class ListScreen extends Component {
 
     componentDidMount() {
         this.getListData();
+        this._onRefresh();
     }
 
     getListData = async () => {
