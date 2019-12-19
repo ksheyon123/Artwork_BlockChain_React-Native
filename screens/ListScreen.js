@@ -84,13 +84,12 @@ export default class ListScreen extends Component {
 
                     jsonMaker.itemcode = json[i].itemCode;
 
-                    var item = {image : 'data:image/gif;base64,' + json[i].item.itemImage, pic_name: json[i].item.itemName, artist_name : json[i].item.artistName};
+                    var item = {image : json[i].item.itemImage, pic_name: json[i].item.itemName, artist_name : json[i].item.artistName};
 
                     jsonMaker.item_infor = item;
 
                     responseData.push(jsonMaker);
                 }
-                console.log(responseData);
                 this.setState({data: responseData})
             }
         } catch (err) {

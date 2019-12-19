@@ -55,10 +55,8 @@ export default class AddScreen extends Component {
                 selected: false 
             });
         }
-        console.log(this.state.imageUri)
         const base64 = await FileSystem.readAsStringAsync(this.state.imageUri, { encoding: 'base64' });
-        this.setState({img_base64 : base64})
-        // console.log(this.state.img_base64)
+        this.setState({img_base64 : base64.slice(0,100)})
     };
 
     _pickCertification = async () => {
@@ -72,10 +70,8 @@ export default class AddScreen extends Component {
                 selected2: false 
             });
         }
-        console.log(this.state.certification)
         const base64 = await FileSystem.readAsStringAsync(this.state.certification, { encoding: 'base64' });
-        this.setState({cer_base64 : base64})
-        console.log(this.state.cer_base64)
+        this.setState({cer_base64 : base64.slice(0,100)})
     };
     
     _onTextContentSizeChange = (event) => {
@@ -169,7 +165,7 @@ export default class AddScreen extends Component {
             headers : {
               'Content-Type' : 'application/json',
             },
-            body : JSON.stringify({ArtistName: this.state.artistName, ItemImage: this.state.img_base64, ItemCertificate: this.state.cer_base64, ItemName: this.state.artName, ItemDetails: this.state.ArtDescription, ArtistIntro: this.state.ArtistDescription}),
+            body : JSON.stringify({ArtistName: this.state.artistName, ItemImage: this.state.img_base64, ItemCertificate: this.state.cer_base64, ItemName: this.state.artName, ItemDetails: this.state.ArtDescription, ArtistIntro: this.state.ArtistDescription, ItemImageUri: this.state.imageUri, ItemCertificateUri:this.state.certification}),
           });
           if (response.ok) { 
             alert('등록 완료');
