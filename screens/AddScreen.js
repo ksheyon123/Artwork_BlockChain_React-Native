@@ -168,7 +168,15 @@ export default class AddScreen extends Component {
             body : JSON.stringify({ArtistName: this.state.artistName, ItemImage: this.state.img_base64, ItemCertificate: this.state.cer_base64, ItemName: this.state.artName, ItemDetails: this.state.ArtDescription, ArtistIntro: this.state.ArtistDescription, ItemImageUri: this.state.imageUri, ItemCertificateUri:this.state.certification}),
           });
           if (response.ok) { 
-            alert('등록 완료');
+            Alert.alert(
+                '알림',
+                '등록완료',
+                [
+                    {text : 'ok',  onPress : () =>
+                        this.props.navigation.navigate("List") 
+                    }
+                ]
+            )
           } 
         } catch (err) {
           console.log(err);
