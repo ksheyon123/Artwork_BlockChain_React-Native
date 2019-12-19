@@ -19,10 +19,6 @@ export default class DetailScreen extends Component {
     }
 
     componentDidMount() {
-        // this.state.receivecode;
-        // const {navigation} = this.props
-        // itemcode = navigation.getParam('itemcode')
-        // this.setState({receivecode : itemcode})
         this.getDetail();
     }
 
@@ -30,13 +26,13 @@ export default class DetailScreen extends Component {
         return (
             <ScrollView style={styles.container}>
                 <View style={styles.image_image}>
-                  <Slider
-                  images = {images}
-                  />
+                    <Slider
+                    images = {images}
+                    />
                 </View>
                 <View style={styles.image_text}>
                     <Text>{this.state.receivecode}</Text>
-                    <Text style={{fontSize:30}}>별이 빛나는 밤</Text>
+        <Text style={{fontSize:30}}>{this.state.itemName}</Text>
                     <Text style={{fontSize:20 ,color: "#727278" ,marginTop:10, marginBottom:70}}>Vincent Willem van Gogh</Text>
                 </View>
                 <View style={styles.image_detail_whole}>
@@ -44,28 +40,28 @@ export default class DetailScreen extends Component {
                         <Text style = {styles.textstyle_tag}>작가</Text>
                     </View>
                     <View style={styles.image_detail_text}>
-                        <Text style={styles.textstyle_text} >Vincent Willem van Gogh</Text>
+        <Text style={styles.textstyle_text} >{this.state.artistName}</Text>
                     </View>
                     <View style={styles.image_detail_tag}>
                         <Text style = {styles.textstyle_tag}>작가 설명</Text>
                     </View>
                     <View style={styles.image_detail_text}>
                         <Text style={styles.textstyle_text}>
-                          빈센트 빌럼 반 고흐는 네덜란드 화가로 일반적으로 서양 미술사상 가장 위대한 화가 중 한 사람으로 여겨진다. 그는 그의 작품 전부를 정신질환을 앓고 자살을 감행하기 전인 약 10년 동안에 만들어냈다.
+                          {this.state.artistIntro}
                         </Text>
                     </View>
                     <View style={styles.image_detail_tag}>
                         <Text style = {styles.textstyle_tag}>작품</Text>
                     </View>
                     <View style={styles.image_detail_text}>
-                        <Text style={styles.textstyle_text}>별이 빛나는 밤</Text>
+        <Text style={styles.textstyle_text}>{this.state.itemName}</Text>
                     </View>
                     <View style={styles.image_detail_tag}>
                         <Text style = {styles.textstyle_tag}>작품 설명</Text>
                     </View>
                     <View style={styles.image_detail_text_2}>
                         <Text style={styles.textstyle_text}>
-                          밤하늘에 별이 떠 있는 모습으로, 이 작품에 쓰인 특유의 화법은 이후 지금도 다른 화가들에 의하여 많이 사용되고 있다. 반 고흐의 아를 체류시기 밤의 풍경은 '론 강 위로 별이 빛나는 밤'에서도 알 수 있듯이 별에 대한 탐구가 두드러진다. 그가 밤의 풍경을 묘사했을 때 자주 사용했던 코발트 블루가 이 작품에서도 주된 색조를 차지하고 있다.
+                          {this.state.itemDescription}
                         </Text>
                     </View>
                 </View>
@@ -80,7 +76,20 @@ export default class DetailScreen extends Component {
                 headers: {
                     'Content-Type' : 'application/json',
                 },
-            })
+            });
+
+            let json = await response.json();
+            if (response.ok) {
+                this.setState ({
+                    itemInfo: [json.itemImage, json.itemCertificate],
+                    itemName: json.itemName,
+                    itemDate: json.itemDate,
+                    itemDescription: json.itemDescription,
+                    artistName: json.artistName,
+                    artistIntro: json.artistIntro,
+                })
+                console.log('?', this.state.itemInfo)
+            }
         } catch (err) {
 
         }

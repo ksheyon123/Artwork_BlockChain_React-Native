@@ -55,6 +55,7 @@ class Slider extends React.Component {
 
   render() {
     const { images } = this.props;
+    console.log('render', images)
     const { selectedIndex } = this.state;
     return (
       <View style={{ height: Math.round(Dimensions.get('window').width * 9 / 16) , width: Dimensions.get("window").width }}>
