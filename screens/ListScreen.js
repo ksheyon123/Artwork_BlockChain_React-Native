@@ -87,7 +87,7 @@ export default class ListScreen extends Component {
 
     getListData = async () => {
         try {
-            let response = await fetch('http://localhost:3000/api/item', {
+            let response = await fetch('http://192.168.0.228:3000/api/item', {
                 method: 'GET',
                 headers: {
                     'Content-type':'application/json',
@@ -107,7 +107,7 @@ export default class ListScreen extends Component {
 
                     responseData.push(jsonMaker);
                 }
-                this.setState({data: responseData})
+                this.setState({data: responseData.reverse()})
             }
         } catch (err) {
 
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     renderItem: {
         alignItems : 'center',
         borderBottomWidth:1,
-        borderBottomColor:"#e3e3e6"
+        borderBottomColor:"#e3e3e6",
     },
     renderItem_image:{
         width: 300, 

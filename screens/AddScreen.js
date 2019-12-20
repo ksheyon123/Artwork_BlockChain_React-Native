@@ -15,7 +15,8 @@ export default class AddScreen extends Component {
         this.state = {
             data : [],
             selected: true,
-            selected2: true
+            selected2: true,
+            refreshing : false
         }
     }
 
@@ -79,6 +80,7 @@ export default class AddScreen extends Component {
         inputHeight: Math.min(event.nativeEvent.contentSize.height, 100)
          });
     }
+
     
     render() {
         return (
@@ -89,14 +91,14 @@ export default class AddScreen extends Component {
                         <View style = {{marginTop : 24}}>
                             <Text style = {styles.inputTitle}>작품명</Text>
                             <TextInput
-                                style = {styles.input} placeholder = "작품명을 입력하세요." autoCapitalize = "none" onChangeText={artName => this.setState({artName})} value={this.state.artName}
+                                style = {styles.input} placeholder = "작품명을 입력하세요." autoCapitalize = "none" onChangeText={artName => this.setState({artName})} value={this.state.artName} ref={input => {this.textInput = input}}
                             />
                         </View>
                     
                         <View style = {{marginTop : 24}}>
                             <Text style = {styles.inputTitle}>작가명</Text>
                             <TextInput
-                                style = {styles.input} placeholder = "작가명을 입력하세요." autoCapitalize = "none" onChangeText={artistName => this.setState({artistName})} value={this.state.artistName}
+                                style = {styles.input} placeholder = "작가명을 입력하세요." autoCapitalize = "none" onChangeText={artistName => this.setState({artistName})} value={this.state.artistName} ref={input => {this.textInput = input}}
                             />
                         </View>
 
@@ -104,6 +106,7 @@ export default class AddScreen extends Component {
                             <Text style = {styles.inputTitle}>작가설명</Text>
                             <TextInput
                                 style = {styles.inputDescription} multiline={true} numberOfLines = {4} placeholder = "작가에대한 설명을 입력하세요" autoCapitalize = "none" onChangeText={ArtistDescription => this.setState({ArtistDescription})} value={this.state.ArtistDescription}
+                                ref={input => {this.textInput = input}}
                             />
                         </View>
                         
@@ -111,6 +114,7 @@ export default class AddScreen extends Component {
                             <Text style = {styles.inputTitle}>작품설명</Text>
                             <TextInput
                                 style = {styles.inputDescription} multiline={true} numberOfLines = {4} placeholder = "작품에대한 설명을 입력하세요" autoCapitalize = "none" onChangeText={ArtDescription => this.setState({ArtDescription})} value={this.state.ArtDescription}
+                                ref={input => {this.textInput = input}}
                             />
                         </View>
                         
@@ -160,7 +164,7 @@ export default class AddScreen extends Component {
 
     handleRegister = async () => {
         try {
-          let response = await fetch('http://localhost:3000/api/setitem', {
+          let response = await fetch('http://192.168.0.228:3000/api/setitem', {
             method: 'POST',
             headers : {
               'Content-Type' : 'application/json',
@@ -172,8 +176,7 @@ export default class AddScreen extends Component {
                 '알림',
                 '등록완료',
                 [
-                    {text : 'ok',  onPress : () =>
-                        this.props.navigation.navigate("List") 
+                    {text : 'ok',  onPress : () => this.clear_textinput()
                     }
                 ]
             )
@@ -181,8 +184,22 @@ export default class AddScreen extends Component {
         } catch (err) {
           console.log(err);
         }
-        
-      }
+    }
+
+    clear_textinput = () => {
+        this.setState({
+            artName : '',
+            artistName : '',
+            imageUri: '',
+            certification: '',
+            ArtistDescription: '',
+            ArtDescription : '',
+            img_base64 : '',
+            cer_base64 : '',
+            img : ''
+        })
+        this.props.navigation.navigate("List") 
+    }
 }
 
 const styles = StyleSheet.create({
