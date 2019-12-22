@@ -92,7 +92,7 @@ export default class DetailScreen extends Component {
 
     getDetail = async () => {
         try {
-            let response = await fetch(`http://localhost:3000/api/item/:${this.state.receivecode}`, {
+            let response = await fetch(`http://0.0.0.0:3000/api/item/:${this.state.receivecode}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

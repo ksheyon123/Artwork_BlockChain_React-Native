@@ -267,7 +267,7 @@ const styles = StyleSheet.create({
     },
     under_button:{
         marginHorizontal : 30,
-        backgroundColor: "#7d00af",
+        backgroundColor: "black",
         borderRadius : 4,
         height : 52,
         alignItems : "center",
