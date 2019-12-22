@@ -86,7 +86,7 @@ export default class ListScreen extends Component {
 
     getListData = async () => {
         try {
-            let response = await fetch('http://0.0.0.0:3000/api/item', {
+            let response = await fetch('http://localhost:3000/api/item', {
                 method: 'GET',
                 headers: {
                     'Content-type':'application/json',
