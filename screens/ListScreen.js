@@ -67,7 +67,7 @@ export default class ListScreen extends Component {
             >
                 <View style={styles.container}>
                     <View style={styles.topImage}>
-                        <Image  style={{ width: '100%', height: 300}} source={{uri : "https://user-images.githubusercontent.com/52062612/71164415-57184780-2292-11ea-801c-73685c7ff024.png"}}/>
+                        <Image  style={{ width: '100%', height: 300}} source={{uri : "https://user-images.githubusercontent.com/52039229/71329598-70f3ac00-256a-11ea-9976-cac25716be44.png"}}/>
                     </View>
                     <View style={styles.form}>
                         <FlatList
@@ -125,22 +125,28 @@ const styles = StyleSheet.create({
     },
     form: {
         flex:1,
+        
     },
     renderItem: {
         alignItems : 'center',
         borderBottomWidth:1,
         borderBottomColor:"#e3e3e6",
+        flexDirection : 'row',
+        // justifyContent : 'space-between',
+        // marginHorizontal : 40
     },
     renderItem_image:{
-        width: 300, 
-        height: 300,
-        borderRadius:500,
-        marginTop:50
+        width: 128, 
+        height: 128,
+        marginVertical : 40,
+        marginLeft : 40,
+        borderRadius : 10
         // alignItems : 'center'
     },
     renderItem_name :{
         marginTop : 20,
-        alignItems : 'center',
+        alignItems : 'flex-start',
+        marginLeft : 80
     },
     renderItem_name_art:{
         fontSize:20,

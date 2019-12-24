@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity, ScrollView, Image,Dimensions } from 'react-native';
 import {SliderBox} from 'react-native-image-slider-box'
 
@@ -37,7 +37,8 @@ export default class DetailScreen extends Component {
                     /> */}
                     <SliderBox
                         images = {this.state.check_image ? this.state.itemInfo : images}
-                        SliderBoxHeight = {Math.round(Dimensions.get('window').width * 9 / 16)}
+                        // SliderBoxHeight = {Math.round(Dimensions.get('window').width * 9 / 16)}
+                        sliderBoxHeight = {400}
                         parentWidth = {Dimensions.get("window").width}
                         dotColor="#7d00af"
                         inactiveDotColor="gray"
@@ -158,3 +159,4 @@ const styles = StyleSheet.create({
         textAlign: 'justify'
     }
 });
+
